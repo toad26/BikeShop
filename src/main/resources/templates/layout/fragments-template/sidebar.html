@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>	
+		<div class="shop_sidebar_area" th:fragment="sidebar">
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget catagory mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30" th:text="Kategorije"></h6>
+
+                <div class="catagories-menu">
+                    <ul>
+                        <li th:each="kategorija : ${kategorije}" th:class="${kategorija.kategorijaId} == ${activeId} ? 'active' : ''"><a th:text="${kategorija.naziv}" th:href="@{'/bicikle/kategorija/'+${kategorija.kategorijaId}}"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

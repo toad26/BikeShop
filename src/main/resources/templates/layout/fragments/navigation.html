@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Header</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:fragment="navigation">
+	
+			<div class="container">
+				<div class="navbar-header">
+				<!-- links toggle -->
+       
+					<button type="button" class="navbar-toggler order-first"
+						data-toggle="collapse" data-target="#navbarNavAltMarkup"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					
+				</div>
+
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a class="nav-link active" th:href="@{/}" href="bicikle">Home</a></li>
+						<li><a class="nav-link active" th:href="@{/about}" href="about">About us</a></li>
+						<li><a class="nav-link active" th:href="@{/bicikle}" href="bicikle">Bicikle</a></li>
+						<li><a class="nav-link active" th:href="@{/korisnici}" href="korisnici">Korisnici</a></li>
+						<li><a class="nav-link active" th:href="@{/logout}" href="logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-form-template}">
+
+	<head>
+		<title>Bicikle Form</title>
+	</head>
+	
+	<div layout:fragment="content" id="content">
+		<h3>Bicikle Form</h3>
+		<form th:action="@{${path}}" th:object="${bicikl}" id="bicikl" method="post" enctype="multipart/form-data">
+		  <div class="form-row">
+		   <div class="col-md-4 mb-3">
+		      <label th:text="Brend" for="brend"></label>
+		      <input type="text" th:errorclass="is-invalid" class="form-control" id="brend" placeholder="Brend" th:field="*{brend}" th:name="brend">
+		    	<div th:if="${#fields.hasErrors('brend')}" th:errors="*{brend}" class="invalid-feedback"></div>
+		    </div>
+		  		  
+		    <div class="col-md-4 mb-3">
+		      <label th:text="Naziv" for="naziv"></label>
+		      <input type="text" th:errorclass="is-invalid" class="form-control" id="naziv" placeholder="Naziv" th:name="naziv" th:field="*{naziv}">
+		    	<div th:if="${#fields.hasErrors('naziv')}" th:errors="*{naziv}" class="invalid-feedback"></div>
+		    </div>
+		   
+		    <div class="col-md-4 mb-3">
+		      <label th:text="Model" for="model"></label>
+		      <div class="input-group">
+		        <input type="text" th:errorclass="is-invalid" class="form-control" id="model" th:field="*{model}"th:name="model" placeholder="Model">
+		      	<div th:if="${#fields.hasErrors('model')}" th:errors="*{model}" class="invalid-feedback"></div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="form-row">
+	    	<div class="col-md-4 mb-3">
+		      <label th:text="Cena" for="cena"></label>
+		      <div class="input-group">
+		        <input type="text" th:errorclass="is-invalid" class="form-control" id="cena" th:field="*{cena}"th:name="cena" placeholder="Cena">
+		      	<div th:if="${#fields.hasErrors('cena')}" th:errors="*{cena}" class="invalid-feedback"></div>
+		      </div>
+		    </div>
+		    
+		    <div class="col-md-4 mb-3">
+		      <label th:text="'Godina Proizvodnje'" for="godinaProizvodnje"></label>
+		      	<input type="text" th:errorclass="is-invalid" class="form-control" id="godinaProizvodnje" placeholder="Godina Proizvodnje" th:field="*{godinaProizvodnje}" th:name="godinaProizvodnje">
+		    	<div th:if="${#fields.hasErrors('godinaProizvodnje')}" th:errors="*{godinaProizvodnje}" class="invalid-feedback"></div>
+		    </div>
+		   
+		   
+		   <div class="col-md-4 mb-3">
+			      <label th:text="Velicina" for="velicina"></label>
+			      <input type="text" th:errorclass="is-invalid" class="form-control" id="velicina" placeholder="Velicina" th:field="*{velicina}" th:name="velicina">
+			    	<div th:if="${#fields.hasErrors('velicina')}" th:errors="*{velicina}" class="invalid-feedback"></div>
+			    </div>
+		  </div>
+		 
+		  <div class="form-row">
+			    <div class="col-md-12 mb-14">
+			      <label th:text="Kategorija" for="kategorija"></label>	
+			      <select th:errorclass="is-invalid" class="form-control" th:field="*{kategorija}" th:name="kategorija">
+			        <option th:each="role: ${kategorije}" th:text="${role.getNaziv()}" th:value="${role.getKategorijaId()}"></option>
+			      </select>
+			      <div th:if="${#fields.hasErrors('kategorija')}" th:errors="*{kategorija}" class="invalid-feedback"></div>
+			    </div>
+		  </div>
+		  <div class="form-row">
+		    	<div class="col-md-12 mb-14">
+			      <label th:text="Specifikacija" for="specifikacija"></label>
+			      	<textarea th:errorclass="is-invalid" class="form-control" id="specifikacija" placeholder="Specifikacija" th:field="*{specifikacija}" th:name="specifikacija"></textarea>
+			    	<div th:if="${#fields.hasErrors('specifikacija')}" th:errors="*{specifikacija}" class="invalid-feedback"></div>
+			    </div>
+		  </div>
+		  
+		  <div class="form-row">
+		    	<div class="col-md-6 mb-4">
+			      <label th:text="Slika" for="slika"></label>
+			      <input type="file" th:errorclass="is-invalid" class="form-control" id="slika" placeholder="Slika" th:field="*{slika}" th:name="slika" multiple>
+			    	<div th:if="${#fields.hasErrors('slika')}" th:errors="*{slika}" class="invalid-feedback"></div>
+			    </div>
+			    
+			    <div class="col-md-6 mb-4">
+			      <label th:text="${'Naslovna Slika'}" for="naslovnaSlika"></label>
+			      <input type="file" th:errorclass="is-invalid" class="form-control" id="naslovnaSlika" placeholder="Slika" th:field="*{naslovnaSlika}" th:name="naslovnaSlika">
+			    	<div th:if="${#fields.hasErrors('naslovnaSlika')}" th:errors="*{naslovnaSlika}" class="invalid-feedback"></div>
+			    </div>
+		  </div>
+		  
+		  <div class="form-row">
+		    	 <button class="btn btn-primary" type="submit">Snimi</button>
+		  </div>
+		  
+		 
+		</form>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			$(function(){
+				$("#js-content").html("From Javascript").slideToggle();
+			});
+		</script>
+	</th:block>
+</html>

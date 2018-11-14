@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-product}">
+	
+	<div layout:fragment="content" id="content">
+		<!-- Product Details Area Start -->
+        <div class="single-product-area clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a th:text="Pocetna" th:href="@{/}"></a></li>
+                                <li class="breadcrumb-item"><a th:text="Narudzbenice" href="@{/narudzbenice}"></a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${narudzbenica.narudzbenicaId}"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <h3>Bicikle</h3>	
+						<table class="table">
+						  <thead class="thead-dark">
+						    <tr>
+						      <th scope="col">Naziv</th>
+						      <th scope="col">Model</th>
+						      <th scope="col">Brend</th>
+						      <th scope="col">Cena</th>
+						      <th scope="col">Action</th>
+						    </tr>
+						  </thead>
+						  <tbody th:if="${bicikle}">
+						      <tr th:each="k : ${bicikle}">
+						      <td th:text="${k.naziv}"></td>
+						      <td th:text="${k.model}"></td>
+						      <td th:text="${k.brend}"></td>
+						      <td th:text="${k.cena}"></td>
+						      <td>
+						      	<a id="ulaz" class="fa fa-play" data-toggle="tooltip" data-placement="top" title="Ulaz" th:href="@{'/bicikl/' + ${k.biciklId}}"></a>
+						      </td>
+						    </tr>  
+						  </tbody>
+						</table>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p th:text="${cena}" class="product-price"></p>
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+           
+                                </div>
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <ul>
+                                	<li class="my-3">
+                                		<span style="color:gray">Broj: </span>
+		  								<span th:text="${narudzbenica.narudzbenicaId} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Korisnicko Ime: </span>
+		  								<span th:text="${narudzbenica.korisnik.korisnickoIme} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Datum:</span>
+		  								<span th:text="${narudzbenica.datum} ?: 'N/A'" ></span>
+                                	</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+				$("#js-content").html("From Javascript").slideToggle();
+			});
+		</script>
+	</th:block>
+</html>

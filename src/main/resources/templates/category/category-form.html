@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="box col-md-6 col-md-offset-3">
+					<form action="#" th:action="@{/saveCategory}" method="post">
+						<label for="name" class="">Name: </label>
+						<input type="text" th:field="*{naziv}" th:class="${#fields.hasErrors('naziv')}? fieldError" />
+						<input type="submit" class="btn btn-submit" value="Save"/>
+					</form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

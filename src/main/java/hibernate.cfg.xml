@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="sessionFactory">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bikeshop</property>
+  <property name="hibernate.connection.username">root</property>
+  <mapping class="com.bikeshop.demo.entities.Bicikl"/>
+  <mapping class="com.bikeshop.demo.entities.CustomSnimi"/>
+  <mapping class="com.bikeshop.demo.entities.Delovi"/>
+  <mapping class="com.bikeshop.demo.entities.GrupaDelova"/>
+  <mapping class="com.bikeshop.demo.entities.Kategorija"/>
+  <mapping class="com.bikeshop.demo.entities.Korisnik"/>
+  <mapping class="com.bikeshop.demo.entities.Korpa"/>
+  <mapping class="com.bikeshop.demo.entities.KorpaProizvodi"/>
+  <mapping class="com.bikeshop.demo.entities.Narudzbenica"/>
+  <mapping class="com.bikeshop.demo.entities.Permisije"/>
+  <mapping class="com.bikeshop.demo.entities.Test"/>
+ </session-factory>
+</hibernate-configuration>

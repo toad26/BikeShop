@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-template}">
+
+	<head>
+		<title>Home</title>
+	</head>
+
+   <!-- Product Catagories Area Start -->
+      <div class="products-catagories-area clearfix" layout:fragment="content" id="content">
+          <div class="amado-pro-catagory clearfix">
+
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_big_honzo.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 1000</p>
+                          <h4>Mountain bike</h4>
+                      </div>
+                  </a>
+              </div>
+
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_cx.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 1200</p>
+                          <h4>Road bike</h4>
+                      </div>
+                  </a>
+              </div>
+
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_hei_hei_trail.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 1000</p>
+                          <h4>Race bike</h4>
+                      </div>
+                  </a>
+              </div>
+
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_libre.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 800</p>
+                          <h4>Hybrid bike</h4>
+                      </div>
+                  </a>
+              </div>
+
+   
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_remote.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 900</p>
+                          <h4>Touring bike</h4>
+                      </div>
+                  </a>
+              </div>
+
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_rove_nrb.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 850</p>
+                          <h4>Cyclo cross</h4>
+                      </div>
+                  </a>
+              </div>
+
+              <!-- Single Catagory -->
+              <div class="single-products-catagory clearfix product">
+                  <a href="shop.html">
+                      <img th:src="@{/images/bg-img/slide_roves.jpg}" alt="">
+                      <!-- Hover Content -->
+                      <div class="hover-content">
+                          <div class="line"></div>
+                          <p>Od 1000</p>
+                          <h4>Single Gear</h4>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          
+          
+        
+      </div>
+        <!-- Product Catagories Area End -->
+	
+	<th:block layout:fragment="scripts">
+
+	</th:block>
+</html>

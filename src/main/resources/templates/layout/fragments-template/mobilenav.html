@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Header</title>
+	</head>
+	<body>
+		<!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav" th:fragment="mobilenav">
+            <!-- Navbar Brand -->
+            <div class="amado-navbar-brand">
+                <a href="index.html"><img th:src="@{/images/core-img/logo.png}" alt=""></a>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     </body>
+ </html>

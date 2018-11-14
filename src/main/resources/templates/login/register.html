@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-form-template}">
+
+	
+	<div layout:fragment="content" id="content">
+		<div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-title">
+                                <h2>Korisnik Forma</h2>
+                            </div>
+							<form th:action="@{${path}}" th:object="${korisnik}" id="korisnik" method="post">
+							  <div class="form-row">
+							    <div class="col-md-4 mb-3">
+							      <label th:text="Ime" for="ime"></label>
+							      <input type="text" th:errorclass="is-invalid" class="form-control" id="ime" placeholder="Ime" th:name="ime" th:field="*{ime}">
+							    	<div th:if="${#fields.hasErrors('ime')}" th:errors="*{ime}" class="invalid-feedback"></div>
+							    </div>
+							    <div class="col-md-4 mb-3">
+							      <label th:text="Prezime" for="prezime"></label>
+							      <input type="text" th:errorclass="is-invalid" class="form-control" id="prezime" placeholder="Prezime" th:field="*{prezime}" th:name="prezime" required>
+							    	<div th:if="${#fields.hasErrors('prezime')}" th:errors="*{prezime}" class="invalid-feedback"></div>
+							    </div>
+							    <div class="col-md-4 mb-3">
+							      <label th:text="'Korisnicko Ime'" for="korisnickoIme"></label>
+							      <div class="input-group">
+							        <div class="input-group-prepend">
+							          <span class="input-group-text" style="border: none"id="korisnickoIme2">@</span>
+							        </div>
+							        <input type="text" th:errorclass="is-invalid" class="form-control" id="korisnickoIme" th:field="*{korisnickoIme}"th:name="korisnickoIme" placeholder="Korisnicko Ime" aria-describedby="inputGroupPrepend3" required>
+							      	<div th:if="${#fields.hasErrors('korisnickoIme')}" th:errors="*{korisnickoIme}" class="invalid-feedback"></div>
+							      </div>
+							    </div>
+							  </div>
+							  <div class="form-row">
+						    	<div class="col-md-6 mb-4">
+							      <label th:text="Adresa" for="adresa"></label>
+							      <input type="text" th:errorclass="is-invalid" class="form-control" id="adresa" placeholder="Adresa" th:field="*{adresa}" th:name="adresa" required>
+							    	<div th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}" class="invalid-feedback"></div>
+							    </div>
+							    <div class="col-md-6 mb-4">
+							      <label th:text="Telefon" for="telefon"></label>
+							      <input type="text" th:errorclass="is-invalid" class="form-control" id="telefon" placeholder="Telefon" th:field="*{telefon}" th:name="telefon" required>
+							    	<div th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}" class="invalid-feedback"></div>
+							    </div>
+							  </div>
+							  <div class="form-row">
+							    	<div class="col-md-6 mb-4">
+								      <label th:text="Sifra" for="sifra"></label>
+								      <input type="text" th:errorclass="is-invalid" class="form-control" id="sifra" placeholder="Sifra" th:field="*{sifra}" th:name="sifra" required>
+								    	<div th:if="${#fields.hasErrors('sifra')}" th:errors="*{sifra}" class="invalid-feedback"></div>
+								    </div>
+								    <div class="col-md-6 mb-4">
+								      <label th:text="Email" for="email"></label>
+								      <input type="text" th:errorclass="is-invalid" class="form-control" id="email" placeholder="Email" th:field="*{email}" th:name="email" required>
+								    	<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+								    </div>
+							  </div>
+							  <div class="form-row">
+							    	<div class="col-md-6 mb-4">
+							    	<label th:text="Datum" for="datum"></label>
+								      <div class="form-group">
+						                <div class="input-group date" id="datum" data-target-input="nearest">
+						                    <input th:errorclass="is-invalid" type="text" th:field="*{datum}" id="dat" th:name="datum" class="form-control " data-target="#datum"/>
+						                    <div class="input-group-append" data-target="#datum" data-toggle="datetimepicker">
+						                        <div class="input-group-text" style="border: none!important"><i class="fa fa-calendar"></i></div>
+						                    </div>
+						                    <div th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}" class="invalid-feedback"></div>
+						                </div>
+						            </div>
+								    </div>
+								    <div class="col-md-6 mb-4">
+								      <label th:text="Role" for="permisije"></label>	
+								      <select th:errorclass="is-invalid" class="w-100" th:field="*{permisije}" th:name="permisije">
+								        <option th:each="role: ${roles}" th:text="${role.getNaziv()}" th:value="${role.getId()}"></option>
+								      </select>
+								      <div th:if="${#fields.hasErrors('permisije')}" th:errors="*{permisije}" class="invalid-feedback"></div>
+								    </div>
+							  </div>
+							  
+							  <button class="btn amado-btn" type="submit">Snimi</button>
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+							
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+		   
+				$('#datum').datetimepicker({
+					//defaultDate: $("#dat").val(),
+					format: 'YYYY-MM-DD'
+                });
+			});
+		</script>
+	</th:block>
+</html>

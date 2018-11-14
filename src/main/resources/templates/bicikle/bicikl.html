@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-product}">
+
+
+	<div layout:fragment="content" id="content">
+		<!-- Product Details Area Start -->
+        <div class="single-product-area clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a th:href="@{/}">Pocetna</a></li>
+                                <li class="breadcrumb-item"><a th:href="@{/bicikle}">Bicikle</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${bicikl.naziv}"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div id="image" class="single_product_thumb">
+                        <div class="spritespin"></div>
+                            <input type="hidden" th:each="slika:${slike}" th:id="${slika}" th:value="@{'/images/bicikle/'+${bicikl.biciklId}+'/'+${slika}}" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price" th:text="RSD + ' '+${bicikl.cena}"></p>
+ 
+                                    <h6 th:text="${bicikl.brend + ' ' + bicikl.model}"></h6>
+                                
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <!-- Avaiable -->
+                                <p class="avaibility"><i class="fa fa-circle"></i> Na lageru</p>
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                            </div>
+
+                            <!-- Add to Cart Form -->
+                            <form th:action="@{/dodajKorpu}" class="cart clearfix" method="post">
+                                <input type="hidden" name="bid" id="bid" th:value="${bicikl.biciklId}">
+	                            <input type="hidden" name="path" id="path" th:value="'/bicikl/'+${bicikl.biciklId}">
+                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Dodaj u korpu</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+
+				var sl = [];
+				var slike = $("#image").find("input");
+
+				slike.each(function( index ) {
+					sl.push(this.value);
+				});
+
+				$('.spritespin').spritespin({
+				    source: sl,
+				    responsive:true,
+				    animate: false,
+				    // reverse interaction direction
+				    sense: -1
+				});
+			});
+		</script>
+	</th:block>
+</html>

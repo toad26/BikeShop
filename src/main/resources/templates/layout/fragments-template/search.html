@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Pretraga</title>
+	</head>
+	<body>
+		<!-- Search Wrapper Area Start -->
+	    <div class="search-wrapper section-padding-100" th:fragment="search">
+	        <div class="search-close">
+	            <i class="fa fa-close" aria-hidden="true"></i>
+	        </div>
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-12">
+	                    <div class="search-content">
+	                        <form th:action="@{/bicikle/search}" method="get">
+	                         	<input type="hidden" name="kategorija" id="kategorija" th:value="${activeId}?${activeId}:''">
+	                            <input type="search" name="search" id="search" placeholder="Pretrazi...">
+	                            <button type="submit"><img th:src="@{/images/core-img/search.png}" alt=""></button>
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-template}">
+
+	<div layout:fragment="content" id="content">
+		<h3>Bicikle</h3>	
+		<a class="btn amado-btn my-3" th:text="Create" th:href="@{/bicikle/create}"></a>
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Naziv</th>
+		      <th scope="col">Brend</th>
+		      <th scope="col">Model</th>
+		      <th scope="col">Cena</th>
+		      <th scope="col">Specifikacija</th>
+		      <th scope="col">Godina</th>
+		      <th scope="col">Velicina</th>
+		      <th scope="col">Kategorija</th>
+		      <th scope="col">Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody th:if="${bicikle}">
+		      <tr th:each="k : ${bicikle}">
+		      <td th:text="${k.naziv}"></td>
+		      <td th:text="${k.brend}"></td>
+		      <td th:text="${k.model}"></td>
+		      <td th:text="${k.cena}"></td>
+		      <td th:text="${k.specifikacija}"></td>
+		      <td th:text="${k.godinaProizvodnje}"></td>
+		      <td th:text="${k.velicina}"></td>
+		      <td th:text="${k.kategorija.naziv}"></td>
+		      <td>
+		      	<a class="fa fa-play" data-toggle="tooltip" data-placement="top" title="Ulaz" th:href="@{'/bicikl/' + ${k.biciklId}}"></a>
+		      	<a class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Izmeni" th:href="@{'/bicikle/update/' + ${k.biciklId}}"></a>
+		      	<a class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Obrisi" th:href="@{'/bicikle/delete/' + ${k.biciklId}}"></a>
+		      </td>
+		    </tr>  
+		  </tbody>
+		</table>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			$(function(){
+				$("#js-content").html("From Javascript").slideToggle();
+			});
+		</script>
+	</th:block>
+</html>

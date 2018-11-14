@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-template}">
+
+	<head>
+		<title>Korisnici</title>
+	</head>
+
+	
+	<div layout:fragment="content" id="content">
+		<h3>Korisnici</h3>	
+		<a th:text="Create" class="btn amado-btn my-3 " th:href="@{/korisnik/create}"></a>
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Ime</th>
+		      <th scope="col">Prezime</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody th:if="${korisnici}">
+		      <tr th:each="k : ${korisnici}">
+		      <td th:text="${k.ime}"></td>
+		      <td th:text="${k.prezime}"></td>
+		      <td th:text="${k.email}"></td>
+		      <td>
+		      	<a id="ulaz" class="fa fa-play" data-toggle="tooltip" data-placement="top" title="Ulaz" th:href="@{'/korisnik/' + ${k.id}}"></a>
+		      	<a class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Izmeni" th:href="@{'/korisnik/update/' + ${k.id}}"></a>
+		      	<a class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Obrisi" th:href="@{'/korisnik/delete/' + ${k.id}}"></a>
+		      </td>
+		    </tr>  
+		  </tbody>
+		</table>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+				$('[data-toggle="tooltip"]').tooltip()
+			});
+		</script>
+	</th:block>
+</html>

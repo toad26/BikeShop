@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-product}">
+	
+	<div layout:fragment="content" id="content">
+		<!-- Product Details Area Start -->
+        <div class="single-product-area clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a th:href="@{/}">Pocetna</a></li>
+                                <li class="breadcrumb-item"><a href="@{/korisnici}">Korisnici</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${korisnik.ime}"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(../images/product-img/default-avatar.png);">
+                                    </li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a class="gallery_img" th:href="@{~/images/product-img/default-avatar.png}">
+                                            <img class="d-block w-100" th:src="@{~/images/product-img/default-avatar.png}" alt="First slide">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p th:text="${korisnik.ime +' ' + korisnik.prezime}" class="product-price"></p>
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+           
+                                </div>
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <ul>
+                                	<li class="my-3">
+                                		<span style="color:gray">Korisnicko Ime: </span>
+		  								<span th:text="${korisnik.korisnickoIme} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Adresa: </span>
+		  								<span th:text="${korisnik.adresa} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Telefon: </span>
+		  								<span th:text="${korisnik.telefon} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Email: </span>
+		  								<span th:text="${korisnik.email} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Datum:</span>
+		  								<span th:text="${korisnik.datum} ?: 'N/A'" ></span>
+                                	</li>
+                                	<li class="my-3">
+                                		<span style="color:gray">Pristup:</span>
+		  								<span th:text="${korisnik.permisije.naziv} ?: 'N/A'" ></span>
+                                	</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+				$("#js-content").html("From Javascript").slideToggle();
+			});
+		</script>
+	</th:block>
+</html>

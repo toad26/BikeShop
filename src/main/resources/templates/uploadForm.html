@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base}">
+
+	<head>
+		<title>Page 1</title>
+	</head>
+	
+	<th:block layout:fragment="breadcrumb">
+		<li class="breadcrumb-item">Page 1</li>
+	</th:block>
+	
+	<div layout:fragment="content" id="content">
+		<div th:if="${message}">
+		<h2 th:text="${message}"></h2>
+	</div>
+
+	<div>
+		<form method="POST" enctype="multipart/form-data" action="/listFiles">
+			<table>
+				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+			</table>
+		</form>
+	</div>
+
+	<div>
+		<ul>
+			<li th:each="file : ${files}">
+				<a th:href="${file}" th:text="${file}"></a>
+			</li>
+		</ul>
+	</div>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			$(function(){
+				$("#js-content").html("From Javascript").slideToggle();
+			});
+		</script>
+	</th:block>
+</html>

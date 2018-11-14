@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-sidebar-template}">
+
+	<div class="amado_product_area section-padding-100" layout:fragment="content" id="content">
+		
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                            
+                            <!-- Sorting -->
+                            <div class="product-sorting d-flex">
+                                <div class="sort-by-date d-flex align-items-center mr-15">
+                                    
+                                    <form id="sortForm" th:action="@{/bicikle/sort}" method="get">
+                                        <input type="hidden" name="kategorija" id="kategorija" th:value="${activeId}?${activeId}:''">
+                                        <div class="form-row">
+	                                        <p style="padding-right: 5px">Sortiraj po:</p>
+								    		<div class="col-md-4 mb-3">
+		                                        <select onchange="document.getElementById('sortForm').submit();" name="sort" id="sortBydate">
+		                                            <option th:selected="(${sort} == 'model')" value="model">Model</option>
+		                                            <option th:selected="(${sort} == 'brend')" value="brend">Marka</option>
+		                                            <option th:selected="(${sort} == 'naziv')" value="naziv">Naziv</option>
+		                                        </select>
+	                                        </div>
+	                                         <div class="col-md-4 mb-3">
+		                                        <select name="order" id="sortASC">
+		                                            <option th:selected="(${order} == 'ASC')" value="ASC">Rastuce</option>
+		                                            <option th:selected="(${order} == 'DESC')" value="DESC">Opadajuce</option>
+		                                        </select>
+	                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <!-- Single Product Area -->
+                    <div th:each="bicikl : ${bicikle}" class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="bicikle">
+                                <img th:src="@{'~/images/bicikle/'+${bicikl.biciklId}+'/'+${bicikl.naslovnaSlika}}" alt="">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" th:src="@{'~/images/bicikle/'+${bicikl.biciklId}}" alt="">
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="product-description d-flex align-items-center justify-content-between">
+                                <!-- Product Meta Data -->
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price" th:text="${bicikl.cena+' RSD'}"></p>
+                                    <a th:href="@{'/bicikl/'+${bicikl.biciklId}}">
+                                        <h6 th:text="${bicikl.naziv}"></h6>
+                                    </a>
+                                </div>
+                                <!-- Ratings & Cart -->
+                                <div class="ratings-cart text-right">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="cart">
+                                    	<form th:id="${'kForm'+bicikl.getBiciklId()}" th:action="@{/dodajKorpu}" method="post">
+	                                    	<input type="hidden" name="bid" id="bid" th:value="${bicikl.getBiciklId()}">
+	                                    	<input type="hidden" name="path" id="path" value="/bicikle">
+                                        	<a th:onclick="${'document.getElementById(&quot;kForm'+bicikl.getBiciklId()+'&quot;).submit()'}" data-toggle="tooltip" data-placement="left" title="Dodaj u korpu"><img th:src="@{~/images/core-img/cart.png}" alt=""></a>
+                                    	</form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+		</div>
+	</div>
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+				$("#js-content").html("From Javascript").slideToggle();
+			});
+		</script>
+	</th:block>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-cart-template}">
+	
+	<body>
+		<div layout:fragment="content" id="content">		
+		
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="cart-title mt-50">
+                            <h2>Korpa</h2>
+                        </div>
+
+                        <div class="cart-table clearfix">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Naziv</th>
+                                        <th>Cena</th>
+                                        <th>Kolicina</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="p : ${proizvodi}">
+                                        <td class="cart_product_img">
+                                            <a href="#"><img th:src="@{~/images/bicikle/10/1.jpg}" alt="Product"></a>
+                                        </td>
+                                        <td class="cart_product_desc">
+                                            <h5>Cannondale Jekyll</h5>
+                                        </td>
+                                        <td class="price">
+                                            <span>RSD 1000</span>
+                                        </td>
+                                        <td class="qty">
+                                        	<form th:action="@{/ukloniKorpu}" method="post">
+                                        		<input type="hidden" name="bid" id="bid" th:value="${p.biciklId}">
+                                        		<button class="btn amado-btn" type="submit">Ukloni</button>
+                                        	</form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-summary">
+                            <h5>Cart Total</h5>
+                            <ul class="summary-table">
+                                <li><span>cena:</span> <span>RSD 1000.00</span></li>
+                                <li><span>dostava:</span> <span>Free</span></li>
+                                <li><span>ukupno:</span> <span>RSD 1000.00</span></li>
+                            </ul>
+                            <div class="cart-btn mt-100">
+                                <a href="cart.html" class="btn amado-btn w-100">Kupi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </body>
+   </html>

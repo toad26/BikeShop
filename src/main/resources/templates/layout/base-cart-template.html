@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="layout/fragments-template/header :: header"></head>
+
+<body>
+	<div class="search-wrapper section-padding-100" th:replace="layout/fragments-template/search :: search"></div>
+	
+	<div class="main-content-wrapper d-flex clearfix">
+		<div class="mobile-nav" th:replace="layout/fragments-template/mobilenav :: mobilenav"></div>
+		
+		<header class="header-area clearfix" th:replace="layout/fragments-template/navigation :: navigation"></header>
+		
+		<div class="cart-table-area section-padding-100" layout:fragment="content"></div>
+	</div>
+	
+	<section th:fragment="newsletter" class="newsletter-area section-padding-100-0" th:replace="layout/fragments-template/newsletter :: newsletter"></section>
+	
+	<footer class="footer_area clearfix" th:replace="layout/fragments-template/footer :: footer"></footer>
+	
+	<div layout:fragment="scripts">
+		 
+	</div>
+	
+		<script th:src="@{~/js/jquery/jquery-2.2.4.min.js}"></script>
+		<!-- Popper js -->
+	    <script th:src="@{~/js/popper.min.js}"></script>
+	    <!-- Bootstrap js -->
+	    <script th:src="@{~/js/bootstrap.min.js}"></script>
+	    <!-- Plugins js -->
+	    <script th:src="@{~/js/plugins.js}"></script>
+	    <!-- Active js -->
+	    <script th:src="@{~/js/active.js}"></script>
+	    
+	    <script src='https://unpkg.com/spritespin@4.0.3/release/spritespin.js' type='text/javascript'></script>
+</body>
+
+</html>

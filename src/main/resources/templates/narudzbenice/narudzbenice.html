@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/base-template}">
+
+	<head>
+		<title>Narudzbenice</title>
+	</head>
+
+	
+	<div layout:fragment="content" id="content">
+		<h3>Narudzbenice</h3>	
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Broj</th>
+		      <th scope="col">Korisnik</th>
+		      <th scope="col">Datum</th>
+		      <th scope="col">Action</th>
+		    </tr>
+		  </thead>
+		  <tbody th:if="${narudzbenice}">
+		      <tr th:each="k : ${narudzbenice}">
+		      <td th:text="${k.narudzbenicaId}"></td>
+		      <td th:text="${k.korisnik.ime}"></td>
+		      <td th:text="${k.datum}"></td>
+		      <td>
+		      	<a id="ulaz" class="fa fa-play" data-toggle="tooltip" data-placement="top" title="Ulaz" th:href="@{'/narudzbenica/' + ${k.narudzbenicaId}}"></a>
+		      	<a class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Izmeni" th:href="@{'/narudzbenice/update/' + ${k.narudzbenicaId}}"></a>
+		      	<a class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Obrisi" th:href="@{'/narudzbenice/delete/' + ${k.narudzbenicaId}}"></a>
+		      </td>
+		    </tr>  
+		  </tbody>
+		</table>
+	</div>
+	
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+				$('[data-toggle="tooltip"]').tooltip()
+			});narudzbenice
+		</script>
+	</th:block>
+</html>
