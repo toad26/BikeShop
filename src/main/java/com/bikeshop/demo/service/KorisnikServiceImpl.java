@@ -13,12 +13,10 @@ import com.bikeshop.demo.entities.Korisnik;
 
 @Repository
 public class KorisnikServiceImpl implements KorisnikService {
-	
 
-	
 	@Autowired
 	private GenericDAO<Korisnik> genericDAO;
-	
+
 	@Override
 	public List<Korisnik> findAll() {
 		return genericDAO.findAll(Korisnik.class);
@@ -43,36 +41,37 @@ public class KorisnikServiceImpl implements KorisnikService {
 	public Korisnik update(Korisnik obj) {
 		return genericDAO.update(obj);
 	}
-	
+
 	public Korisnik findByName(String username, String password) {
 		try {
-			return (Korisnik) genericDAO.getManager().createNativeQuery(
-				"SELECT * FROM korisnik WHERE korisnicko_ime=:username AND sifra=:sifra", Korisnik.class)
-				.setParameter("username", username).setParameter("sifra", password).getSingleResult();
-		} catch (NoResultException nre){
+			return (Korisnik) genericDAO.getManager()
+					.createNativeQuery("SELECT * FROM korisnik WHERE korisnicko_ime=:username AND sifra=:sifra",
+							Korisnik.class)
+					.setParameter("username", username).setParameter("sifra", password).getSingleResult();
+		} catch (NoResultException nre) {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public Korisnik findByField(String field, String value) {
 		try {
-			return (Korisnik) genericDAO.getManager().createNativeQuery(
-				"SELECT * FROM korisnik WHERE "+field+"=:value", Korisnik.class)
-				.setParameter("value", value).getSingleResult();
-		} catch (NoResultException nre){
+			return (Korisnik) genericDAO.getManager()
+					.createNativeQuery("SELECT * FROM korisnik WHERE " + field + "=:value", Korisnik.class)
+					.setParameter("value", value).getSingleResult();
+		} catch (NoResultException nre) {
 			return null;
 		}
 	}
 
 	@Override
 	public Korisnik findByUsername(String username) {
-		
+
 		try {
-			return (Korisnik) genericDAO.getManager().createNativeQuery(
-				"SELECT * FROM korisnik WHERE korisnicko_ime=:korisnicko_ime", Korisnik.class)
-				.setParameter("korisnicko_ime", username).getSingleResult();
-		} catch (NoResultException nre){
+			return (Korisnik) genericDAO.getManager()
+					.createNativeQuery("SELECT * FROM korisnik WHERE korisnicko_ime=:korisnicko_ime", Korisnik.class)
+					.setParameter("korisnicko_ime", username).getSingleResult();
+		} catch (NoResultException nre) {
 			return null;
 		}
 	}

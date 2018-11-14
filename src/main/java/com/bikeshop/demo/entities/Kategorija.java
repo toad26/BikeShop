@@ -6,52 +6,34 @@ import javax.validation.constraints.NotNull;
 
 import java.util.List;
 
-
 /**
  * The persistent class for the kategorija database table.
  * 
  */
 @Entity
-@Table(name="kategorija")
+@Table(name = "kategorija")
 @NamedNativeQueries({
-    @NamedNativeQuery(
-            name    =   "getAllKategorija",
-            query   =   "SELECT * " +
-                        "FROM kategorija",
-                        resultClass=Kategorija.class
-    ),
-    @NamedNativeQuery(
-            name    =   "getAllByIdKategorija",
-            query   =   "SELECT * " +
-                        "FROM kategorija " +
-                        "WHERE kategorija_id = :kategorija_id",
-                        resultClass=Kategorija.class
-    )
-})
+		@NamedNativeQuery(name = "getAllKategorija", query = "SELECT * "
+				+ "FROM kategorija", resultClass = Kategorija.class),
+		@NamedNativeQuery(name = "getAllByIdKategorija", query = "SELECT * " + "FROM kategorija "
+				+ "WHERE kategorija_id = :kategorija_id", resultClass = Kategorija.class) })
 
-@SqlResultSetMapping(
-        name = "KategorijaMapping",
-        entities = @EntityResult(
-                entityClass = Kategorija.class,
-                fields = {
-                    @FieldResult(name = "kategorija_id", column = "kategorijaId"),
-                    @FieldResult(name = "naziv", column = "naziv")
-                 }
-        )
-)
+@SqlResultSetMapping(name = "KategorijaMapping", entities = @EntityResult(entityClass = Kategorija.class, fields = {
+		@FieldResult(name = "kategorija_id", column = "kategorijaId"),
+		@FieldResult(name = "naziv", column = "naziv") }))
 
 public class Kategorija implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="kategorija_id")
+	@Column(name = "kategorija_id")
 	private int kategorijaId;
-	
+
 	@NotNull(message = "Name is a required field")
 	private String naziv;
 
-	//bi-directional many-to-one association to Bicikl
-	@OneToMany(mappedBy="kategorija")
+	// bi-directional many-to-one association to Bicikl
+	@OneToMany(mappedBy = "kategorija")
 	private List<Bicikl> bicikls;
 
 	public Kategorija() {

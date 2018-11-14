@@ -18,17 +18,15 @@ import com.bikeshop.demo.entities.Korisnik;
 import com.bikeshop.demo.service.KategorijaService;
 import com.bikeshop.demo.service.KorisnikService;
 
-
-
 @Controller
 public class CategoryController {
-	
+
 	@Autowired
-    private KategorijaService kategorijaDAO;
-	
+	private KategorijaService kategorijaDAO;
+
 	@Autowired
-    private KorisnikService korisnikDAO;
-	
+	private KorisnikService korisnikDAO;
+
 	@GetMapping("/saveCategory")
 	public String saveCategory(HttpServletRequest request, Model model, HttpSession session) {
 		List<Kategorija> prod = kategorijaDAO.findAll();
@@ -45,13 +43,12 @@ public class CategoryController {
 	@PostMapping("/saveCategory")
 	public String saveCategory(@Valid Kategorija k, HttpServletRequest request, Model model) {
 
-			k.setNaziv("Vrsta");
-			
-			List<Kategorija> prod = kategorijaDAO.findAll();
-			
-			model.addAttribute("prod", prod);
+		k.setNaziv("Vrsta");
 
-			
-		return "layout/base";	
+		List<Kategorija> prod = kategorijaDAO.findAll();
+
+		model.addAttribute("prod", prod);
+
+		return "layout/base";
 	}
 }

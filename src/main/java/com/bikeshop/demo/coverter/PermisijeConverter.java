@@ -10,12 +10,12 @@ import com.bikeshop.demo.service.PermisijeService;
 @Component
 public class PermisijeConverter implements Converter<String, Permisije> {
 
-@Autowired
-private PermisijeService permisijeService;
+	@Autowired
+	private PermisijeService permisijeService;
 
 	@Override
 	public Permisije convert(String arg0) {
-	    Integer id = new Integer(arg0);
-	    return permisijeService.readById(id);
+		Integer id = new Integer(arg0);
+		return permisijeService.readById(id);
 	}
 }

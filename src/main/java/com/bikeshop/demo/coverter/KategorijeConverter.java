@@ -10,13 +10,12 @@ import com.bikeshop.demo.service.KategorijaService;
 @Component
 public class KategorijeConverter implements Converter<String, Kategorija> {
 
-@Autowired
-private KategorijaService kategorijaService;
+	@Autowired
+	private KategorijaService kategorijaService;
 
 	@Override
 	public Kategorija convert(String arg0) {
-	    Integer id = new Integer(arg0);
-	    return kategorijaService.readById(id);
+		Integer id = new Integer(arg0);
+		return kategorijaService.readById(id);
 	}
 }
-

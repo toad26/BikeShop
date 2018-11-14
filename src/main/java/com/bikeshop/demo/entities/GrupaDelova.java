@@ -4,25 +4,24 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the grupa_delova database table.
  * 
  */
 @Entity
-@Table(name="grupa_delova")
-@NamedQuery(name="GrupaDelova.findAll", query="SELECT g FROM GrupaDelova g")
+@Table(name = "grupa_delova")
+@NamedQuery(name = "GrupaDelova.findAll", query = "SELECT g FROM GrupaDelova g")
 public class GrupaDelova implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="grupa_delova_id")
+	@Column(name = "grupa_delova_id")
 	private int grupaDelovaId;
 
 	private String naziv;
 
-	//bi-directional many-to-one association to Delovi
-	@OneToMany(mappedBy="grupaDelova")
+	// bi-directional many-to-one association to Delovi
+	@OneToMany(mappedBy = "grupaDelova")
 	private List<Delovi> delovis;
 
 	public GrupaDelova() {

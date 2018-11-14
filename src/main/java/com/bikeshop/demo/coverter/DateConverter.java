@@ -18,10 +18,10 @@ public class DateConverter implements Converter<String, Date> {
 		} catch (ParseException e) {
 			try {
 				return new SimpleDateFormat("MM/DD/YY").parse(arg0);
-			} catch (ParseException e2){
+			} catch (ParseException e2) {
 				e2.printStackTrace();
 				return null;
 			}
-		}  
+		}
 	}
 }

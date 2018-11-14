@@ -6,11 +6,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 public class BeanConfigurations {
-	
 
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new AuthenticationSuccessHandlerImpl();
-    }
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new AuthenticationSuccessHandlerImpl();
+	}
 
 }

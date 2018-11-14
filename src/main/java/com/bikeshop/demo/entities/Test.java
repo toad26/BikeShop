@@ -3,13 +3,12 @@ package com.bikeshop.demo.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the permisije database table.
  * 
  */
 @Entity
-@Table(name="test")
+@Table(name = "test")
 public class Test implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +16,6 @@ public class Test implements Serializable {
 	private int id;
 
 	private String ime;
-
 
 	public Test() {
 	}

@@ -13,10 +13,10 @@ import com.bikeshop.demo.entities.Kategorija;
 @Repository
 @Transactional
 public class KategorijaServiceImpl implements KategorijaService {
-	
+
 	@Autowired
 	private GenericDAO<Kategorija> genericDAO;
-	
+
 	@Override
 	public List<Kategorija> findAll() {
 		return genericDAO.findAll(Kategorija.class);

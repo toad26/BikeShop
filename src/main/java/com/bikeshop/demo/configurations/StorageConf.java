@@ -7,21 +7,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties("storage")
-@PropertySource(value= {"classpath:application.properties"})
+@PropertySource(value = { "classpath:application.properties" })
 public class StorageConf {
 
-    /**
-     * Folder location for storing files
-     */
+	/**
+	 * Folder location for storing files
+	 */
 	@Value("${file.upload-dir}")
-    private String location;
+	private String location;
 
-    public String getLocation() {
-        return location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 }

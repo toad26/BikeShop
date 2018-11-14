@@ -24,39 +24,39 @@ import com.bikeshop.demo.utils.BikeUtils;
 
 @Controller
 public class KorisniciController {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
-    private KorisnikService korisnikService;
-	
+	private KorisnikService korisnikService;
+
 	@Autowired
-    private PermisijeService permisijeService;
-	
+	private PermisijeService permisijeService;
+
 	@Autowired
-    private HttpSession session;
-	
+	private HttpSession session;
+
 	@GetMapping("korisnici")
 	public String korisnici(Model model) {
 		List<Korisnik> korisnici = korisnikService.findAll();
 		model.addAttribute("korisnici", korisnici);
 		return "korisnici/korisnici";
 	}
-	
+
 	@RequestMapping("korisnik/{id}")
 	public String korisnik(@PathVariable("id") int id, Model model) {
 		Korisnik k = korisnikService.readById(id);
 		model.addAttribute("korisnik", k);
-		
+
 		return "korisnici/korisnik";
 	}
-	
+
 	@GetMapping("korisnik-form")
 	public String korisnikForma() {
 		return "korisnici/korisnik-form";
 	}
-	
+
 	@GetMapping("korisnik/update/{id}")
 	public String korisnikUpdate(@PathVariable("id") int id, Model model) {
 		Korisnik k = korisnikService.readById(id);
@@ -64,29 +64,30 @@ public class KorisniciController {
 
 		model.addAttribute("roles", roles);
 		model.addAttribute("korisnik", k);
-		model.addAttribute("path", "/korisnik/update/"+id);
-		
+		model.addAttribute("path", "/korisnik/update/" + id);
+
 		return "korisnici/korisnik-form";
 	}
-	
+
 	@PostMapping("korisnik/update/{id}")
-	public String update(@Valid @ModelAttribute Korisnik kor, BindingResult bd, @PathVariable("id") int id, Model model) {
+	public String update(@Valid @ModelAttribute Korisnik kor, BindingResult bd, @PathVariable("id") int id,
+			Model model) {
 		List<Permisije> roles = permisijeService.findAll();
 		model.addAttribute("roles", roles);
-			
+
 		if (bd.hasErrors()) {
 			Korisnik k = korisnikService.readById(id);
 			kor.setDatum(k.getDatum());
 			model.addAttribute("korisnik", kor);
-			model.addAttribute("path", "/korisnik/update/"+id);
-            return "/korisnici/korisnik-form";
-        }
+			model.addAttribute("path", "/korisnik/update/" + id);
+			return "/korisnici/korisnik-form";
+		}
 		korisnikService.update(kor);
 		model.addAttribute("korisnik", kor);
-		
-		return "redirect:/korisnik/"+id;
+
+		return "redirect:/korisnik/" + id;
 	}
-	
+
 	@GetMapping("korisnik/create")
 	public String korisnikCreate(Model model) {
 
@@ -96,29 +97,29 @@ public class KorisniciController {
 		model.addAttribute("roles", roles);
 		model.addAttribute("korisnik", k);
 		model.addAttribute("path", "/korisnik/create");
-		
+
 		return "korisnici/korisnik-form";
 	}
-	
+
 	@PostMapping("korisnik/create")
 	public String create(@Valid @ModelAttribute Korisnik kor, BindingResult bd, Model model) {
-		
+
 		kor.setSifra(bCryptPasswordEncoder.encode(kor.getSifra()));
-		
+
 		List<Permisije> roles = permisijeService.findAll();
 		model.addAttribute("roles", roles);
-				
+
 		if (bd.hasErrors()) {
 			model.addAttribute("korisnik", kor);
 			model.addAttribute("path", "/korisnik/create");
-            return "/korisnici/korisnik-form";
-        }
+			return "/korisnici/korisnik-form";
+		}
 		korisnikService.save(kor);
 		model.addAttribute("korisnik", kor);
-		
+
 		return "redirect:/korisnici";
 	}
-	
+
 	@GetMapping("korisnik/delete/{id}")
 	public String snimiKorisnika(@PathVariable("id") int id, Model model) {
 

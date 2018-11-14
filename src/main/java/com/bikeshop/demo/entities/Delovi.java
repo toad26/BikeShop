@@ -3,26 +3,25 @@ package com.bikeshop.demo.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the delovi database table.
  * 
  */
 @Entity
-@Table(name="delovi")
-@NamedQuery(name="Delovi.findAll", query="SELECT d FROM Delovi d")
+@Table(name = "delovi")
+@NamedQuery(name = "Delovi.findAll", query = "SELECT d FROM Delovi d")
 public class Delovi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="delovi_id")
+	@Column(name = "delovi_id")
 	private int deloviId;
 
 	private String brend;
 
 	private double cena;
 
-	@Column(name="korisnik_id")
+	@Column(name = "korisnik_id")
 	private int korisnikId;
 
 	private String model;
@@ -36,9 +35,9 @@ public class Delovi implements Serializable {
 
 	private String velicina;
 
-	//bi-directional many-to-one association to GrupaDelova
+	// bi-directional many-to-one association to GrupaDelova
 	@ManyToOne
-	@JoinColumn(name="grupa_delova_id")
+	@JoinColumn(name = "grupa_delova_id")
 	private GrupaDelova grupaDelova;
 
 	public Delovi() {

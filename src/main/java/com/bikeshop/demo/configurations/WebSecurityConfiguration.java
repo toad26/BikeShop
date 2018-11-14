@@ -20,72 +20,59 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 import com.bikeshop.demo.service.KorisnikService;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	
-	 @Autowired 
-	 private AuthenticationSuccessHandler authenticationSuccessHandler;
-	 
-	  @Autowired
-	  KorisnikService korisnikService;
-	  
+	@Autowired
+	private AuthenticationSuccessHandler authenticationSuccessHandler;
 
-	    
-		@Value("${spring.queries.korisnik-query}")
-		private String korisnikQuery;
-		
-		@Value("${spring.queries.permisije-query}")
-		private String permisijeQuery;
-		
-	    @Override
-	    protected void configure(HttpSecurity httpSecurity) throws Exception {
-	        httpSecurity.authorizeRequests()
-	                .antMatchers("/", "/css/**", "/js/**", "/images/**","/fonts/**","/vendors/**","/vendors").permitAll()
-	                .antMatchers("/").permitAll()
-					.antMatchers("/login").permitAll()
-					.antMatchers("/home").permitAll()
-					.antMatchers("/users/delete").permitAll()
-					.antMatchers("/registration").permitAll()
+	@Autowired
+	KorisnikService korisnikService;
+
+	@Value("${spring.queries.korisnik-query}")
+	private String korisnikQuery;
+
+	@Value("${spring.queries.permisije-query}")
+	private String permisijeQuery;
+
+	@Override
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.authorizeRequests()
+				.antMatchers("/", "/css/**", "/js/**", "/images/**", "/fonts/**", "/vendors/**", "/vendors").permitAll()
+				.antMatchers("/").permitAll().antMatchers("/login").permitAll().antMatchers("/home").permitAll()
+				.antMatchers("/users/delete").permitAll().antMatchers("/registration").permitAll()
 //					.antMatchers("/bicikle").permitAll()
-					
-	                .antMatchers("/user/**").hasAnyRole("admin", "user")
-	                .antMatchers("/admin/**").hasRole("admin")
-	                
-	                .anyRequest()
-	                .authenticated().and().csrf().disable().formLogin()
-					.loginPage("/login").failureUrl("/login?error=true")
-					.successHandler(authenticationSuccessHandler)
-					.and().logout()
-					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.logoutSuccessUrl("/").and().exceptionHandling()
-					.accessDeniedPage("/access-denied");
-	    }
 
-	    @Autowired
-		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-	    	auth.userDetailsService(new UserDetailsService() {
-	    		
-	    		public UserDetails loadUserByUsername(String username) 
-	    			throws UsernameNotFoundException {
-	    			com.bikeshop.demo.entities.Korisnik activeUserInfo = korisnikService.findByUsername(username);
-	    				GrantedAuthority authority = new SimpleGrantedAuthority("admin");
-	    				UserDetails userDetails = (UserDetails)new User(activeUserInfo.getKorisnickoIme(),
-	    						activeUserInfo.getSifra(), Arrays.asList(authority));
-	    				
-	    				return userDetails;
-	    		}
-	    	});
-	    }
-	    
-	    @Bean
-		public BCryptPasswordEncoder passwordEncoder() {
-			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-			return bCryptPasswordEncoder;
-		}
-		
+				.antMatchers("/user/**").hasAnyRole("admin", "user").antMatchers("/admin/**").hasRole("admin")
+
+				.anyRequest().authenticated().and().csrf().disable().formLogin().loginPage("/login")
+				.failureUrl("/login?error=true").successHandler(authenticationSuccessHandler).and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and()
+				.exceptionHandling().accessDeniedPage("/access-denied");
+	}
+
+	@Autowired
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(new UserDetailsService() {
+
+			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+				com.bikeshop.demo.entities.Korisnik activeUserInfo = korisnikService.findByUsername(username);
+				GrantedAuthority authority = new SimpleGrantedAuthority("admin");
+				UserDetails userDetails = (UserDetails) new User(activeUserInfo.getKorisnickoIme(),
+						activeUserInfo.getSifra(), Arrays.asList(authority));
+
+				return userDetails;
+			}
+		});
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
+	}
+
 }

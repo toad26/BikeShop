@@ -12,10 +12,10 @@ import com.bikeshop.demo.entities.Narudzbenica;
 
 @Repository
 public class NarudzbenicaServiceImpl implements NarudzbenicaService {
-	
+
 	@Autowired
 	private GenericDAO<Narudzbenica> genericDAO;
-	
+
 	@Override
 	public List<Narudzbenica> findAll() {
 		return genericDAO.findAll(Narudzbenica.class);
@@ -40,15 +40,14 @@ public class NarudzbenicaServiceImpl implements NarudzbenicaService {
 	public Narudzbenica update(Narudzbenica obj) {
 		return genericDAO.update(obj);
 	}
-	
-	
+
 	@Override
 	public Narudzbenica findByField(String field, String value) {
 		try {
-			return (Narudzbenica) genericDAO.getManager().createNativeQuery(
-				"SELECT * FROM narudzbenica WHERE "+field+"=:value", Narudzbenica.class)
-				.setParameter("value", value).getSingleResult();
-		} catch (NoResultException nre){
+			return (Narudzbenica) genericDAO.getManager()
+					.createNativeQuery("SELECT * FROM narudzbenica WHERE " + field + "=:value", Narudzbenica.class)
+					.setParameter("value", value).getSingleResult();
+		} catch (NoResultException nre) {
 			return null;
 		}
 	}

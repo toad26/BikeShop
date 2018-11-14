@@ -8,79 +8,67 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-
 /**
  * The persistent class for the bicikl database table.
  * 
  */
 @Entity
-@Table(name="bicikl")
+@Table(name = "bicikl")
 @NamedNativeQueries({
-    @NamedNativeQuery(
-            name    =   "getAllBicikl",
-            query   =   "SELECT * " +
-                        "FROM bicikl",
-                        resultClass=Bicikl.class
-    ),
-    @NamedNativeQuery(
-            name    =   "getAllByIdBicikl",
-            query   =   "SELECT * " +
-                        "FROM bicikl " +
-                        "WHERE bicikl_id = :id",
-                        resultClass=Bicikl.class
-    )
-})
+		@NamedNativeQuery(name = "getAllBicikl", query = "SELECT * " + "FROM bicikl", resultClass = Bicikl.class),
+		@NamedNativeQuery(name = "getAllByIdBicikl", query = "SELECT * " + "FROM bicikl "
+				+ "WHERE bicikl_id = :id", resultClass = Bicikl.class) })
 public class Bicikl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue
-	@Column(name="bicikl_id")
+	@Id
+	@GeneratedValue
+	@Column(name = "bicikl_id")
 	private int biciklId;
-	
-	@NotNull(message="Brend je prazan.")
-	@Size(min=3, max=20, message="Brend mora imati vise od 3 slova.")
-	private String brend;
-	
-	@Positive(message="Mora biti vece od 0.")
-	@NotNull(message="Cena je prazna.")
-	@Max(value=10000, message="Najveca cena.")
-	private double cena;
-	
 
-	@Pattern(regexp = "[1-9]\\d*|0\\d+", message="Mora biti broj.")
-	@NotNull(message="Godina je prazan.")
-	@Size(min=4, max=4, message="Godina mora imati tacno 4 karaktera.")
-	@Column(name="godina_proizvodnje")
+	@NotNull(message = "Brend je prazan.")
+	@Size(min = 3, max = 20, message = "Brend mora imati vise od 3 slova.")
+	private String brend;
+
+	@Positive(message = "Mora biti vece od 0.")
+	@NotNull(message = "Cena je prazna.")
+	@Max(value = 10000, message = "Najveca cena.")
+	private double cena;
+
+	@Pattern(regexp = "[1-9]\\d*|0\\d+", message = "Mora biti broj.")
+	@NotNull(message = "Godina je prazan.")
+	@Size(min = 4, max = 4, message = "Godina mora imati tacno 4 karaktera.")
+	@Column(name = "godina_proizvodnje")
 	private String godinaProizvodnje;
-	
-	@NotNull(message="Model je prazan.")
-	@Size(min=3, max=20, message="Model mora imati vise od 3 slova.")
+
+	@NotNull(message = "Model je prazan.")
+	@Size(min = 3, max = 20, message = "Model mora imati vise od 3 slova.")
 	private String model;
-	
-	@NotNull(message="Naziv je prazan.")
-	@Size(min=3, max=20, message="Naziv mora imati vise od 3 slova.")
+
+	@NotNull(message = "Naziv je prazan.")
+	@Size(min = 3, max = 20, message = "Naziv mora imati vise od 3 slova.")
 	private String naziv;
-	
-	@Pattern(regexp = "([^\\s]+(\\.(?i)(jpeg|jpg|png|gif|bmp))$)", message="Ekstenzija nije dozvoljena.")
-	@NotNull(message="Slika je prazna.")
+
+	@Pattern(regexp = "([^\\s]+(\\.(?i)(jpeg|jpg|png|gif|bmp))$)", message = "Ekstenzija nije dozvoljena.")
+	@NotNull(message = "Slika je prazna.")
 	private String slika;
 
 	@Lob
-	@NotNull(message="Specifikacija je prazna.")
-	@Size(min=3, message="Specifikacija mora imati vise od 3 slova.")
+	@NotNull(message = "Specifikacija je prazna.")
+	@Size(min = 3, message = "Specifikacija mora imati vise od 3 slova.")
 	private String specifikacija;
-	
-	@NotNull(message="Velicina je prazna.")
-	@Size(min=1, max=3, message="Velicina mora imati vise od 3 slova.")
+
+	@NotNull(message = "Velicina je prazna.")
+	@Size(min = 1, max = 3, message = "Velicina mora imati vise od 3 slova.")
 	private String velicina;
 
-	//bi-directional many-to-one association to Kategorija
+	// bi-directional many-to-one association to Kategorija
 	@ManyToOne
-	@JoinColumn(name="kategorija_id")
+	@JoinColumn(name = "kategorija_id")
 	private Kategorija kategorija;
-	
-	@Pattern(regexp = "([^\\s]+(\\.(?i)(jpeg|jpg|png|gif|bmp))$)", message="Ekstenzija nije dozvoljena.")
-	@NotNull(message="Slika je prazna.")
+
+	@Pattern(regexp = "([^\\s]+(\\.(?i)(jpeg|jpg|png|gif|bmp))$)", message = "Ekstenzija nije dozvoljena.")
+	@NotNull(message = "Slika je prazna.")
 	private String naslovnaSlika;
 
 	public Bicikl() {
@@ -121,7 +109,7 @@ public class Bicikl implements Serializable {
 	public String getModel() {
 		return this.model;
 	}
-	
+
 	public String getSlika() {
 		return slika;
 	}
@@ -165,7 +153,7 @@ public class Bicikl implements Serializable {
 	public void setKategorija(Kategorija kategorija) {
 		this.kategorija = kategorija;
 	}
-	
+
 	public String getNaslovnaSlika() {
 		return this.naslovnaSlika;
 	}

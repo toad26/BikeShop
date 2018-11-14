@@ -16,17 +16,17 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
-	 private static final SimpleGrantedAuthority ADMIN_AUTHORITY = new SimpleGrantedAuthority("admin");
-	    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	private static final SimpleGrantedAuthority ADMIN_AUTHORITY = new SimpleGrantedAuthority("admin");
+	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-	    @Override
-	    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-	                                        Authentication authentication) throws IOException, ServletException {
-	        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-	        if (authorities.contains(ADMIN_AUTHORITY)) {
-	            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
-	        } else {
-	            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
-	        }
-	    }
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+			Authentication authentication) throws IOException, ServletException {
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		if (authorities.contains(ADMIN_AUTHORITY)) {
+			redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
+		} else {
+			redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
+		}
+	}
 }

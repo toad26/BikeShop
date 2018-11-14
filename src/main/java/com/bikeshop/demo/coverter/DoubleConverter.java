@@ -12,6 +12,6 @@ public class DoubleConverter implements Converter<String, Double> {
 			return Double.parseDouble(arg0);
 		} catch (Exception e) {
 			return 0.0;
-		}  
+		}
 	}
 }

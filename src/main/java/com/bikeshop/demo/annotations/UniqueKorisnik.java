@@ -14,11 +14,11 @@ import com.bikeshop.demo.validator.KorisnikValidator;
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueKorisnik {
-    String message() default "Email nije jedinstven.";
- 
-    Class<?>[] groups() default {};
- 
-    Class<? extends Payload>[] payload() default {};
-    
-    String field() default "";
+	String message() default "Email nije jedinstven.";
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
+
+	String field() default "";
 }

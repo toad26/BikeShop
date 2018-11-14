@@ -4,28 +4,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the permisije database table.
  * 
  */
 @Entity
-@Table(name="permisije")
+@Table(name = "permisije")
 @NamedNativeQueries({
-    @NamedNativeQuery(
-            name    =   "getAllPermisije",
-            query   =   "SELECT * " +
-                        "FROM permisije",
-                        resultClass=Permisije.class
-    ),
-    @NamedNativeQuery(
-            name    =   "getAllByIdPermisije",
-            query   =   "SELECT * " +
-                        "FROM permisije " +
-                        "WHERE id = :id",
-                        resultClass=Permisije.class
-    )
-})
+		@NamedNativeQuery(name = "getAllPermisije", query = "SELECT * "
+				+ "FROM permisije", resultClass = Permisije.class),
+		@NamedNativeQuery(name = "getAllByIdPermisije", query = "SELECT * " + "FROM permisije "
+				+ "WHERE id = :id", resultClass = Permisije.class) })
 public class Permisije implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,8 +23,8 @@ public class Permisije implements Serializable {
 
 	private String naziv;
 
-	//bi-directional many-to-one association to Korisnik
-	@OneToMany(mappedBy="permisije")
+	// bi-directional many-to-one association to Korisnik
+	@OneToMany(mappedBy = "permisije")
 	private List<Korisnik> korisniks;
 
 	public Permisije() {
@@ -78,11 +67,11 @@ public class Permisije implements Serializable {
 
 		return korisnik;
 	}
-	
-	public boolean isSelectedPermisija(Integer permisijeId){
-        if (permisijeId != null) {
-            return permisijeId.equals(id);
-        }
-        return false;
-    } 
+
+	public boolean isSelectedPermisija(Integer permisijeId) {
+		if (permisijeId != null) {
+			return permisijeId.equals(id);
+		}
+		return false;
+	}
 }

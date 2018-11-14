@@ -13,10 +13,10 @@ import com.bikeshop.demo.entities.Permisije;
 @Repository
 @Transactional
 public class PermisijeServiceImpl implements PermisijeService {
-	
+
 	@Autowired
 	private GenericDAO<Permisije> genericDAO;
-	
+
 	@Override
 	public List<Permisije> findAll() {
 		return genericDAO.findAll(Permisije.class);

@@ -10,84 +10,72 @@ import org.springframework.data.annotation.Transient;
 
 import com.bikeshop.demo.annotations.UniqueKorisnik;
 
-
 import java.util.Date;
 import java.util.List;
-
 
 /**
  * The persistent class for the korisnik database table.
  * 
  */
 @Entity
-@Table(name="korisnik")
+@Table(name = "korisnik")
 @NamedNativeQueries({
-    @NamedNativeQuery(
-            name    =   "getAllKorisnik",
-            query   =   "SELECT * " +
-                        "FROM korisnik",
-                        resultClass=Korisnik.class
-    ),
-    @NamedNativeQuery(
-            name    =   "getAllByIdKorisnik",
-            query   =   "SELECT * " +
-                        "FROM korisnik " +
-                        "WHERE id = :id",
-                        resultClass=Korisnik.class
-    )
-})
+		@NamedNativeQuery(name = "getAllKorisnik", query = "SELECT * " + "FROM korisnik", resultClass = Korisnik.class),
+		@NamedNativeQuery(name = "getAllByIdKorisnik", query = "SELECT * " + "FROM korisnik "
+				+ "WHERE id = :id", resultClass = Korisnik.class) })
 public class Korisnik implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private int id;
-	
+
 	@NotNull
-	@Size(min=3, max=32, message="Adresa mora imati vise od 3 slova.")
+	@Size(min = 3, max = 32, message = "Adresa mora imati vise od 3 slova.")
 	private String adresa;
-	
-	@NotNull(message="Datum je prazan ili pogresno upisan.")
+
+	@NotNull(message = "Datum je prazan ili pogresno upisan.")
 	@Temporal(TemporalType.DATE)
 	private Date datum;
-	
-	@UniqueKorisnik(field="email")
-	@Email(message="Neispravan email.")
-	@NotNull(message="Email je prazan.")
+
+	@UniqueKorisnik(field = "email")
+	@Email(message = "Neispravan email.")
+	@NotNull(message = "Email je prazan.")
 	private String email;
-	
+
 	@NotNull
-	@Size(min=3, max=32, message="Ime mora imati vise od 3 slova.")
+	@Size(min = 3, max = 32, message = "Ime mora imati vise od 3 slova.")
 	private String ime;
-	
-	@UniqueKorisnik(field="korisnicko_ime", message="Korisnicko ime nije jedinstveno.")
-	@NotNull(message="Korisnicko ime je prazno.")
-	@Size(min=3, max=32, message="Korisnicko ime mora imati vise od 3 slova.")
-	@Column(name="korisnicko_ime")
+
+	@UniqueKorisnik(field = "korisnicko_ime", message = "Korisnicko ime nije jedinstveno.")
+	@NotNull(message = "Korisnicko ime je prazno.")
+	@Size(min = 3, max = 32, message = "Korisnicko ime mora imati vise od 3 slova.")
+	@Column(name = "korisnicko_ime")
 	private String korisnickoIme;
-	
-	@NotNull(message="Prezime je prazno.")
-	@Size(min=3, max=32, message="Prezime mora imati vise od 3 slova.")
+
+	@NotNull(message = "Prezime je prazno.")
+	@Size(min = 3, max = 32, message = "Prezime mora imati vise od 3 slova.")
 	private String prezime;
-	
-	@NotNull(message="Sifra ime je prazna.")
-	@Size(min=6, max=32, message="Sifra mora imati vise od 6 slova.")
+
+	@NotNull(message = "Sifra ime je prazna.")
+	@Size(min = 6, max = 32, message = "Sifra mora imati vise od 6 slova.")
 	@Transient
 	private String sifra;
-	
-	@NotNull(message="Telefon ime je prazan.")
-	@Size(min=3, max=32, message="Ime mora imati vise od 3 slova.")
+
+	@NotNull(message = "Telefon ime je prazan.")
+	@Size(min = 3, max = 32, message = "Ime mora imati vise od 3 slova.")
 	private String telefon;
 
-	//bi-directional many-to-one association to CustomSnimi
-	@OneToMany(mappedBy="korisnik")
+	// bi-directional many-to-one association to CustomSnimi
+	@OneToMany(mappedBy = "korisnik")
 	private List<CustomSnimi> customSnimis;
 
-	//bi-directional many-to-one association to Permisije
+	// bi-directional many-to-one association to Permisije
 	@ManyToOne
 	private Permisije permisije;
 
-	//bi-directional many-to-one association to Narudzbenica
-	@OneToMany(mappedBy="korisnik")
+	// bi-directional many-to-one association to Narudzbenica
+	@OneToMany(mappedBy = "korisnik")
 	private List<Narudzbenica> narudzbenicas;
 
 	public Korisnik() {
@@ -100,7 +88,7 @@ public class Korisnik implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getAdresa() {
 		return this.adresa;
 	}

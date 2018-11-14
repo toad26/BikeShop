@@ -24,77 +24,75 @@ import com.bikeshop.demo.utils.BikeUtils;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
-    private KorisnikService korisnikService;
-	
+	private KorisnikService korisnikService;
+
 	@Autowired
 	private PermisijeService permisijeService;
-	
+
 	@Autowired
-    private HttpSession session;
-	
+	private HttpSession session;
+
 	@GetMapping("login")
 	public String getLogin() {
 		return "login/login";
 	}
-	
+
 	@PostMapping("login")
 	public String processLogin(HttpServletRequest request, Model model, Korisnik korisnik) {
 		korisnik = korisnikService.findByName(request.getParameter("username"), request.getParameter("password"));
-		
+
 		if (!BikeUtils.isEmpty(korisnik)) {
 			session.setAttribute("user", korisnik);
 			session.setAttribute("role", korisnik.getPermisije().getNaziv());
 			return "redirect:/";
-		}	
-	
+		}
+
 		model.addAttribute("error", "Wrong Credentials");
 		return "login/login";
 	}
-	
+
 	@GetMapping("logout")
 	public String logout(Model model) {
 		session.invalidate();
 		model.addAttribute("logout", "Logut");
 		return "login/login";
 	}
-	
-	
+
 	@GetMapping("registracija")
 	public String registracija(Model model) {
-		
+
 		Korisnik k = new Korisnik();
 		List<Permisije> roles = new ArrayList<>();
 		roles.add(permisijeService.readById(2));
 		model.addAttribute("roles", roles);
 		model.addAttribute("korisnik", k);
 		model.addAttribute("path", "/korisnik/create");
-		
+
 		return "login/register";
-		
+
 	}
-	
+
 	@PostMapping("registracija")
 	public String registracijaPost(@Valid @ModelAttribute Korisnik kor, BindingResult bd, Model model) {
-		
+
 		kor.setSifra(bCryptPasswordEncoder.encode(kor.getSifra()));
 		List<Permisije> roles = permisijeService.findAll();
 		model.addAttribute("roles", roles);
-				
+
 		if (bd.hasErrors()) {
 			model.addAttribute("korisnik", kor);
 			model.addAttribute("path", "/korisnik/create");
-            return "/login/register";
-        }
+			return "/login/register";
+		}
 		korisnikService.save(kor);
 		model.addAttribute("korisnik", kor);
-		
+
 		return "redirect:/korisnici";
 	}
-	
-	
+
 }
